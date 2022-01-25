@@ -1,0 +1,14 @@
+{application, webauthn,
+ [{description, "Server-side webauthn library"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib,
+    jiffy,
+    base64url,
+    cbor
+   ]},
+  {licenses, ["BSD"]},
+  {links, []}
+ ]}.
