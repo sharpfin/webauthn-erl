@@ -1,7 +1,7 @@
-mylib
+Webauthn Erlang
 =====
 
-An OTP library
+An simple server side implementation for supporting webauthn in erlang.
 
 Build
 -----
