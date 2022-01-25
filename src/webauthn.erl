@@ -18,7 +18,6 @@
 %%  Returns a new challenge (32 random bytes in URL safe Base64 encoding).
 
 -spec challenge() -> binary().
-
 challenge() ->
     Random = crypto:strong_rand_bytes(32),
     base64url:encode(Random).
@@ -41,7 +40,7 @@ register_response(ClientDataBase64, RegDataBase64, Challenge, Origin) ->
     end.
 
 %% sign_response(ClientDataBase64, SignatureDataBase64, AuthenicatorData
-%%               Challenge, Origin, PubKeyEncoded)
+%%               Challenge, Origin, PubKeyEncoded, Counter)
 %%  Validates response and returns the new counter value if the signature is valid.
 
 -spec sign_response(binary(), binary(), binary(), binary(), binary(), binary(), integer()) ->
@@ -81,8 +80,6 @@ validate_client_data({Type, Challenge, Origin}, Type, Challenge, Origin) ->
     ok;
 validate_client_data(_, _, _, _) ->
     throw(validation_failed).
-
-
 
 verify_counter(AuthenicatorData, PreviousCounter) ->
     <<_:33/bytes, BinaryCounter:4/bytes, _/bytes>> = AuthenicatorData,
@@ -131,5 +128,3 @@ read_cose_key(#{1 := 2, 3 := -7, -1 := 1, -2 := X, -3 := Y}) ->
     {X, Y};
 read_cose_key(_) ->
     throw(unsupported_key).
-
-
