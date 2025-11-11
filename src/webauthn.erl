@@ -93,7 +93,7 @@ verify_counter(AuthenicatorData, PreviousCounter) ->
 
 parse_client_data(Base64Data) ->
     ClientData = base64url:decode(Base64Data),
-    Properties = jiffy:decode(ClientData, [return_maps]),
+    Properties = json:decode(ClientData),
 
     Type = maps:get(<<"type">>, Properties),
     Challenge = maps:get(<<"challenge">>, Properties),
